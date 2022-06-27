@@ -7,5 +7,7 @@ COPY . .
 RUN npm run build
 
 FROM nginx
+# Expose default internal port of nginx 
+EXPOSE 80
 # Here we are copying build directory created in builder image to nginx container
 COPY --from=builder /app/build  /usr/share/nginx/html
