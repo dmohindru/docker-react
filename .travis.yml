@@ -12,3 +12,16 @@ before_install:
 # This section contains series of test to run our test/deployment
 script:
   - docker run -e CI=true dmohindru/docker-react npm run test
+
+# This section tells travis CI how to deploy our application to AWS
+deploy:
+  provider: elasticbeanstalk
+  region: 'ap-southeast-2'
+  app: 'docker-react-dmohindru'
+  env: 'Dockerreactdmohindru-env'
+  bucket_name: 'elasticbeanstalk-ap-southeast-2-402520608287'
+  bucket_path: 'docker-react-dmohindru'
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: '$AWS_SECRET_KEY'
