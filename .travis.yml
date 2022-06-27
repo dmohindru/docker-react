@@ -1,0 +1,14 @@
+language: generic
+# Means hey travis we need super user privileges to execute this build
+sudo: required
+# Services required for this build
+service:
+  - docker
+
+# Series of steps required before our test/deployment can even start
+before_install:
+  - docker build -t dmohindru/docker-react -f Dockerfile.dev .
+
+# This section contains series of test to run our test/deployment
+script:
+  - docker run -e CI=true dmohindru/docker-react npm run test
